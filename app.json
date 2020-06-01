@@ -1,0 +1,17 @@
+{
+  "name": "WoodShop",
+  "displayName": "WoodShop",
+  "expo": {
+    "name": "WoodShop",
+    "slug": "WoodShop",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

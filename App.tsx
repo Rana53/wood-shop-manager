@@ -1,12 +1,15 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React , {Component} from 'react'; 
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
-  );
+import Welcome from './components/screens/login.jsx'
+import Navigator from './routes/navigator';
+
+export default class App extends Component{ 
+  render(){
+    return (   
+      <Navigator/>
+    )
+  }
 }
 
 const styles = StyleSheet.create({

@@ -1,13 +1,16 @@
 import React , {Component} from 'react'; 
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 
-import Welcome from './components/screens/login.jsx'
+import Dashboard from './components/screens/dashboard';
 import Navigator from './routes/navigator';
+import NewClient from './components/screens/newClient';
 
 export default class App extends Component{ 
   render(){
     return (   
-      <Navigator/>
+       <Navigator/>
+      //  <Dashboard/>
+      // <NewClient/>
     )
   }
 }

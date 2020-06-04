@@ -3,20 +3,27 @@ import {  createAppContainer } from 'react-navigation';
 
 import Welcome from '../components/screens/Welcome';
 import Login from '../components/screens/login';
-
+import Dashboard from '../components/screens/dashboard';
+import NewClient from '../components/screens/newClient';
 
 const appStackNavigator = createStackNavigator(
   { 
     WelcomeScreen: {
       screen: Welcome
     },
-    LgoinScreen:{
+    LoginScreen: {
       screen: Login
+    },
+    DashbordScreen: {
+      screen: Dashboard
+    },
+    NewClientScreen: {
+      screen: NewClient
     }
   },
   {
     defaultNavigationOptions: {
-      header: null
+      headerShown: false
     }
   }
   

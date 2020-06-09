@@ -9,7 +9,7 @@ import {
   Button,
   Alert
 } from 'react-native';
-
+import firebase from '../../database/firebase';
 import GStyleSheet from '../globalstyle';
 
 class newClient extends Component {
@@ -26,32 +26,43 @@ class newClient extends Component {
         
       },
       comment: '',
-
-      formError: false
+      
     }
   }
   onSubmitForm = () => {
-    console.log("Yes")
-    console.log(this.state);
+    const db = firebase.database();
+    
+    console.log(' on submit form function');
     if(this.state.name == '' || this.state.mobileNumber.length < 11 || this.state.amount == null){
-      console.log('inside')
+      console.log('inside if ')
       Alert.alert(
         "Client Info. error",
         "Try again",
         [
-          
-          { text: "OK", onPress: () => console.log("OK Pressed") },
-          { text: "Cancle", onPress: () => console.log("OK Pressed") }
+          { text: "ok", onPress: () => console.log("OK Pressed") }
         ],
         { cancelable: false }
       )
     }
     else{
-      // this.props.navigation.navigate('DashbordScreen', this.state);
-      // this.navigation.navigate.goBack();
+      console.log('inside else ')
+      db.ref('/clients').push({
+        name: this.state.name,
+        village: this.state.village,
+        post: this.state.post,
+        upozila: this.state.upozila,
+        mobileNumber: this.state.mobileNumber,
+        amount: this.state.amount,
+        paidHistory: {
+          
+        },
+        comment: this.state.comment
+      });
+      this.props.navigation.navigate('DashbordScreen');
+      
     }
-    
   }
+  
   render() {
     return (
       <ImageBackground 
@@ -120,7 +131,7 @@ class newClient extends Component {
           </View>
         </ScrollView>
         <View style={{margin: 10}}>
-          <Button title='Add Client' onPress={this.onSubmitForm.bind(this)}/>
+          <Button title='Add Client' onPress={this.onSubmitForm}/>
         </View>
         
       </ImageBackground>      
@@ -135,7 +146,6 @@ const styles = StyleSheet.create({
   headerText: {
     margin: 19,
     color: 'white',
-    fontSize: 19,
   },
   formView: {
     margin: 19,

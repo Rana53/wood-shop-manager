@@ -6,11 +6,15 @@ import {
     Button
   } from 'react-native';
 class SingleItem extends Component{
+  constructor(props){
+    super(props);
+  }
   render(){
     return (
         <View 
           style={
-            {flexDirection:'row', 
+            { flex: 1,
+              flexDirection:'row', 
               justifyContent: 'space-between', 
               backgroundColor:'red', 
               width:'95%',
@@ -19,12 +23,12 @@ class SingleItem extends Component{
             }
             }>
           <View style={{margin: 5, fontsize: 50}}>
-            <Text style={{ fontSize: 15, margin: 2}}>Name</Text>
-            <Text style={{ fontSize: 15, margin: 2}}>Address</Text>
-            <Text style={{ fontSize: 15, margin: 2}}>mobileNumber</Text>
+            <Text style={{ fontSize: 15, margin: 2}}>{this.props.client.name}</Text>
+            <Text style={{ fontSize: 15, margin: 2}}>{this.props.client.village} , {this.props.client.post}</Text>
+            <Text style={{ fontSize: 15, margin: 2}}>{this.props.client.mobileNumber}</Text>
           </View>
           <View style={{justifyContent: 'space-between', margin: 5}}>
-            <Text style={{fontSize: 40}}>1000</Text>
+            <Text style={{fontSize: 40}}>$ {this.props.client.amount}</Text>
             <View style={{alignItems:'flex-end'}}>
               <TouchableOpacity style={{backgroundColor: 'white', borderRadius: 10}}>
                 <Text style={{fontSize: 19}}> View </Text>

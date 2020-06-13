@@ -8,9 +8,9 @@ import NewClient from './components/screens/newClient';
 export default class App extends Component{ 
   render(){
     return (   
-       <Navigator/>
+      <Navigator/>
       //  <Dashboard/>
-      // <NewClient/>
+      //  <NewClient/>
     )
   }
 }

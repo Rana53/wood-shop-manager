@@ -8,7 +8,8 @@ import {
   ScrollView,
   FlatList,
   TextInput,
-  Button
+  Button, 
+  ActivityIndicator
 } from 'react-native';
 import GStyleSheet from '../globalstyle';
 import firebase from '../../database/firebase';
@@ -26,11 +27,11 @@ class Dashboard extends Component {
   }
   
   componentDidMount(){
+    
     const db = firebase.database();
    
     db.ref('/clients').on('value', snapshot => {
       let dataItem = snapshot.val()
-      let data = {...dataItem};
       this.setState({
         clients: {...dataItem}
       })
@@ -38,18 +39,27 @@ class Dashboard extends Component {
         keys: Object.keys(this.state.clients)
       })
     })
-    
   }
+
   onCreateNewUser = () => {
     this.props.navigation.navigate('NewClientScreen');
   }
   
   render() {
-    // console.log('Key  ',this.state.keys)
-    // console.log('data ', this.state.clients[this.state.keys[0]])
+    console.log('Key  ',this.state.keys)
+    console.log('data ', this.state.clients[this.state.keys[0]])
+
+    if(this.state.keys.length < 1){
+      return (
+        <View style={styles.preloader}>
+          <ActivityIndicator size="large" color="#9E9E9E"/>
+        </View>
+      )
+    }
+     
     return (
       <ImageBackground 
-        style={GStyleSheet.container}
+        style={styles.container}
         source={require('../../assets/bg_image.png')}>
         <Text style={styles.headerText}>your client information here</Text>
         <View style={{width: '80%',height: 25, backgroundColor: 'blue', borderRadius: 10, marginBottom: 5}}>
@@ -65,6 +75,7 @@ class Dashboard extends Component {
                 key={key}
                 id={key}
                 client={this.state.clients[key]}
+                nav={this.props.navigation.navigate}
             />)
           })
           :
@@ -72,9 +83,7 @@ class Dashboard extends Component {
           
         }
         </ScrollView>
-        {/* <ScrollView>
-          
-        </ScrollView> */}
+        
         </View>
          <View style={{ margin: 10}}>
            <Button title='Add new Customer' onPress={this.onCreateNewUser}/>
@@ -96,6 +105,15 @@ const styles = StyleSheet.create({
   headerText: {
     margin: 19,
     color: 'white',
+  }, 
+  preloader: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })
 export default Dashboard;

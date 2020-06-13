@@ -5,6 +5,8 @@ import Welcome from '../components/screens/Welcome';
 import Login from '../components/screens/login';
 import Dashboard from '../components/screens/dashboard';
 import NewClient from '../components/screens/newClient';
+import ViewDetils from '../components/screens/viewDetails';
+import Transaction from '../components/screens/transaction';
 
 const appStackNavigator = createStackNavigator(
   { 
@@ -19,6 +21,12 @@ const appStackNavigator = createStackNavigator(
     },
     NewClientScreen: {
       screen: NewClient
+    },
+    ViewDetilsScreen: {
+      screen: ViewDetils
+    },
+    TransactionScreen: {
+      screen: Transaction
     }
   },
   {

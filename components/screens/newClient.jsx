@@ -22,19 +22,18 @@ class newClient extends Component {
       upozila: '',
       mobileNumber: '',
       amount: null,
-      paidHistory: {
-        
-      },
+      paidHistory: [
+
+      ],
       comment: '',
       
     }
   }
   onSubmitForm = () => {
     const db = firebase.database();
-    
+    //db.ref().remove()
     console.log(' on submit form function');
     if(this.state.name == '' || this.state.mobileNumber.length < 11 || this.state.amount == null){
-      console.log('inside if ')
       Alert.alert(
         "Client Info. error",
         "Try again",
@@ -43,9 +42,7 @@ class newClient extends Component {
         ],
         { cancelable: false }
       )
-    }
-    else{
-      console.log('inside else ')
+    } else {
       db.ref('/clients').push({
         name: this.state.name,
         village: this.state.village,
@@ -53,13 +50,17 @@ class newClient extends Component {
         upozila: this.state.upozila,
         mobileNumber: this.state.mobileNumber,
         amount: this.state.amount,
-        paidHistory: {
-          
-        },
+        paidHistory: [{
+          date: new Date().getDate()+'-'+ new Date().getMonth()+'-'+new Date().getFullYear(),
+          paidAmount: 0,
+          remaining: this.state.amount
+
+        }
+
+        ],
         comment: this.state.comment
       });
-      this.props.navigation.navigate('DashbordScreen');
-      
+      this.props.navigation.goBack();
     }
   }
   
